@@ -1,0 +1,64 @@
+<div class="col-md-12 mt-4" >
+<h2>{{page_title}}</h2>
+<p *ngIf="status!='success' ">registrate en nuestra plataforma para crear nuevas entradas y mucho mas!!!</p>
+
+<div class="alert alert-success" *ngIf="status=='success'">
+	El registro de ha completado correctamente,<a [routerLink]="['/login']"> Logueate aqui</a>
+</div>
+
+<div class="aler alert-danger" *ngIf="status=='error'">
+	El registro no se ha completado,vuelve a intentarlo mas tarde
+</div>
+
+<form class="col-md-7 ml-0 pl-0" #registerForm="ngForm"  (ngSubmit)="onSubmit(registerForm)"  >
+
+	<div class="form-group">
+
+		<label for="name">Nombre</label>
+		<input type="text"  class="form-control" name="name" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z,' ']+">
+		<small  *ngIf="user.name && !name.valid  ;else flag"  class="invalid-feedback  d-block">
+			Datos no validos 
+		</small>
+
+		<ng-template #flag>
+			<small *ngIf="user.name" class="valid-feedback d-block w-36 p-2 mt-2" style="background-color:#eee;" >
+				         Datos Correctos
+			</small>
+		</ng-template>
+	
+
+	</div>
+
+	<div class="form-group">
+	<label for="surname">Apellidos</label>
+	<input type="text" name="surname" class="form-control" #surname="ngModel" [(ngModel)]="user.surname" required pattern="[a-zA-Z,' ']+">
+	<small  *ngIf="user.surname && !surname.valid "  class="invalid-feedback  d-block">
+			Datos no validos 
+		</small>
+	</div>
+
+
+	<div class="form-group">
+	<label for="email">Email</label>
+	<input type="text" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+	<small *ngIf="!email.valid && user.email" class="invalid-feedback d-block">
+		Datos no validos
+	</small>
+	</div>
+
+	<div class="form-group">
+	<label for="password">Password</label>
+	<input type="password" name="password" class="form-control" #password="ngModel"  [(ngModel)]="user.password" required>
+	<small *ngIf="user.password && user!=null " class="invalid-feedback d-block">
+		<small *ngIf="user.password.length<8">
+			La contraseña debe contener almenos 8 caracteres
+		</small>
+		
+	</small>
+	
+		
+	</div>
+
+	<input type="submit" value="Registrarme" class="btn btn-success" [disabled]="registerForm.invalid"/>
+</form>
+</div>

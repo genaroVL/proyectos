@@ -1,0 +1,43 @@
+<div *ngIf="!post">
+</div>
+
+<div class="col-md-12" *ngIf="post">
+<h1>{{post.title}}</h1>
+<hr/>
+<p>
+{{category.name}}- <a [routerLink]="['/perfil',post.user_id]">{{user.name+' '+user.surname}} </a>
+</p>
+<hr/>
+<div class="doc w-100"  >
+	<div class="box">
+		<img   *ngIf="post.image" class="w-100" src="{{url+'post/image/'+post.image}}"/>
+	</div>
+</div>
+<p [innerHtml]="post.content"> </p>
+</div>
+
+<!--
+
+<div  >
+	<h1 name="title" >{{post.title}}</h1>
+
+	
+
+
+
+	<p  [innerHtml]="post.content"></p>
+
+
+
+<div class="doc"  >
+	<div class="box">
+		<img   class="w-100" src="{{url+'post/image/'+post.image}}"/>
+	</div>
+</div>
+
+
+	<p>
+		{{post.category.name}}-{{post.user.name+' '+post.user.surname}}
+	</p>
+	</div>
+-->
